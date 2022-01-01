@@ -42,7 +42,8 @@ int my_check(int ac, char **av, t_list  **a)
         b = initialise(my_atoi(av[i]));
         if (!int_check(av[i]) || duplicate_check(*a, b))
         {
-            ft_putstr_fd("Error\n", 1);
+            ft_putstr_fd("Error\n", 2);
+            free(b);
             return (0);
         }
         my_push_back(a, b);

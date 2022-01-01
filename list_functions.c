@@ -48,6 +48,19 @@ t_list  *my_pop(t_list **list)
     lst -> next = NULL;
     return (lst);
 }
+
+t_list  *my_pop_last(t_list *list) 
+{
+    t_list  *pop;
+
+    if (!list || !(list -> next))
+        return (list);
+    while (list -> next -> next)
+        list = list -> next;
+    pop = list -> next;
+    list -> next = NULL;
+    return (pop);
+}
 //swap 2 top elements
 // void    my_swap(t_list **list)
 // {
@@ -69,27 +82,6 @@ void    my_swap(t_list **list)
     *list = (*list) -> next;
     lst -> next = (*list) -> next;
     (*list) -> next = lst;
-}
-
-// void    my_rotate(t_list **list)
-// {
-//     my_push_back(list, my_pop(list));
-// }
-
-//rotate a list  rra
-void    my_rrotate(t_list **list)
-{
-    t_list *lst;
-    t_list  *pop;
-
-    lst = *list;
-    if (!lst || !(lst -> next))
-        return ;    
-    while(lst -> next -> next)
-        lst = lst -> next;
-    pop = lst -> next;
-    lst -> next = NULL;
-    my_push(list, pop);
 }
 //check if list is sorted
 int my_issorted(t_list *lst)

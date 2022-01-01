@@ -74,7 +74,6 @@ int my_atoi(char *str)
 
 	n = 0;
 	symbole = 1;
-
 	if (*str == '-')
 		symbole = -1;
 	if (*str == '+' || *str == '-')

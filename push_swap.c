@@ -1,6 +1,5 @@
 #include "push_swap.h"
 
-
 int main(int ac, char **av)
 {
     t_list  *a;
@@ -14,7 +13,6 @@ int main(int ac, char **av)
     lastb = 0;
     if (!my_check(ac, av, &a) || !a)
         return (0);
-    // my_print(a);
     while (!my_issorted(a))
         my_sort(&a, &b, &lasta, &lastb);
     while (b)
@@ -25,7 +23,5 @@ int main(int ac, char **av)
             my_sort(&a, &b, &lasta, &lastb);
     }
     my_putstr(NULL, 0);
-    if (my_issorted(a))
-        printf("sorted\n");
     return (0);
 }

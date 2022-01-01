@@ -29,7 +29,7 @@ static void    last_is_min(t_list **a, t_list **b, int *lasta)
 {
     int min;
 
-    my_rrotate(a);
+    my_push(a, my_pop_last(*a)); //rrotate
     my_putstr("rra", 0);
     (*lasta) = min_last(*a, &min); // min won't change anyway 
 }
@@ -58,7 +58,7 @@ void    my_sort(t_list **a, t_list **b, int *lasta, int *lastb)
     if (min == 2147483647)
         (*lasta) = min_last(*a, &min);
     // last node has the min & list size > 3
-    if (min == (*lasta) && (*a) -> next -> next -> next)
+    if (min == (*lasta) && (*a) -> next -> next && (*a) -> next -> next -> next)
         last_is_min(a, b, lasta);
     // top bigger than last node 
     else if ((*a) -> data > (*lasta))
