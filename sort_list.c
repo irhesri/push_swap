@@ -25,7 +25,7 @@ static void    my_rsort(t_list **b, int *lastb)
 }
 
 // rev rotate a - make the last node the top 
-static void    last_is_min(t_list **a, t_list **b, int *lasta)
+static void    last_is_min(t_list **a, int *lasta)
 {
     int min;
 
@@ -36,6 +36,15 @@ static void    last_is_min(t_list **a, t_list **b, int *lasta)
 // rotate a - make the top the last node 
 static void    top_is_bigger(t_list **a, int *lasta)
 {
+    int data;
+
+    data = (*a) -> next -> data;
+    if (data > (*lasta) && data < (*a) -> data  
+        && (*a) -> next -> next && (*a) -> next -> next -> next) // size a > 3
+    {
+        my_swap(a);
+        my_putstr("sa", 2);
+    }
     (*lasta) = (*a) -> data;
     my_push_back(a, my_pop(a));
     my_putstr("ra", 1);
@@ -59,7 +68,7 @@ void    my_sort(t_list **a, t_list **b, int *lasta, int *lastb)
         (*lasta) = min_last(*a, &min);
     // last node has the min & list size > 3
     if (min == (*lasta) && (*a) -> next -> next && (*a) -> next -> next -> next)
-        last_is_min(a, b, lasta);
+        last_is_min(a, lasta);
     // top bigger than last node 
     else if ((*a) -> data > (*lasta))
         top_is_bigger(a, lasta);

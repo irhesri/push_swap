@@ -33,7 +33,6 @@ static int duplicate_check(t_list *a, t_list *new)
 int my_check(int ac, char **av, t_list  **a)
 {
     int i;
-    int     j;
     t_list  *b;
 
     i = 1;
