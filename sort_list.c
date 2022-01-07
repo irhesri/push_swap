@@ -73,7 +73,7 @@ void    my_sort(t_list **a, t_list **b, int *lasta, int *lastb)
     else if ((*a) -> data > (*lasta))
         top_is_bigger(a, lasta);
     // top bigger than second node  
-    else if ((*a) -> data > (*a) -> next -> data)
+    else if ((*a) -> data > (*a) -> next -> data || (*a) -> next -> data > *lasta) //newline
     {
         my_swap(a);
         my_putstr("sa", 2);

@@ -6,6 +6,7 @@ int main(int ac, char **av)
     t_list  *b;
     int lasta;
     int lastb;
+    char **str;
 
     a = NULL;
     b = NULL;

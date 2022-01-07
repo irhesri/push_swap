@@ -36,6 +36,8 @@ char	*get_next_line(int fd);
 void	ft_putstr_fd(char *s, int fd);
 int     my_atoi(char *str);
 int     my_strcmp(char *s1, char *s2);
+char	**ft_split(char const *s, char c);
+size_t  ft_strlen(const char *str);
 /***********************************************************************************************/
 
 #endif

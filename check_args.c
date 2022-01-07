@@ -32,21 +32,24 @@ static int duplicate_check(t_list *a, t_list *new)
 
 int my_check(int ac, char **av, t_list  **a)
 {
-    int i;
     t_list  *b;
 
-    i = 1;
-    while (i < ac)
+    av++;
+    if (ac == 2)
+        av = ft_split(*av, ' ');
+    if (!av)
+        exit(0);
+    while (*av)
     {
-        b = initialise(my_atoi(av[i]));
-        if (!int_check(av[i]) || duplicate_check(*a, b))
+        b = initialise(my_atoi(*av));
+        if (!int_check(*av) || duplicate_check(*a, b))
         {
             ft_putstr_fd("Error\n", 2);
             free(b);
             return (0);
         }
         my_push_back(a, b);
-        i++;
+        av++;
     }
     return (1);
 }
