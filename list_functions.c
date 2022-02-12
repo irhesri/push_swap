@@ -7,37 +7,49 @@ t_list  *initialise(int data)
     lst = malloc(sizeof(t_list));
     if (!lst)
         return (NULL);
-    (lst -> data) = data;
-    lst -> next = NULL; 
+    lst -> data = data;
+    lst -> index = 0;
+    lst -> next = NULL;
     return (lst);
 }
 
-void    my_push(t_list **list, t_list *new)
+void    my_push(t_list **list, t_list *new, int *size)
 {
-    if (!new)
-        return ;
-    new -> next = *list;
-    *list = new;
-}
-
-void    my_push_back(t_list **list, t_list *new)
-{
-    t_list *lst;
-
     if (!new)
         return ;
     if (!*list)
     {
         *list = new;
+        //info -> last = new -> data;
+        (*size) = 1;
         return ;
     }
+    (*size)++;
+    new -> next = *list;
+    *list = new;
+}
+
+void    my_push_back(t_list **list, t_list *new, int *size)
+{
+    t_list *lst;
+
+    if (!new)
+        return ;
+    //info -> last = new -> data;
+    if (!*list)
+    {
+        *list = new;
+        (*size) = 1;
+        return ;
+    }
+    (*size)++;
     lst = *list;
     while (lst -> next)
         lst = lst -> next;
     lst -> next = new;
 }
 //remove and return front 
-t_list  *my_pop(t_list **list) 
+t_list  *my_pop(t_list **list, int *size) 
 {
     t_list *lst;
 
@@ -46,19 +58,29 @@ t_list  *my_pop(t_list **list)
         return (NULL);
     *list = (*list) -> next;
     lst -> next = NULL;
+    (*size)--;
     return (lst);
 }
 
-t_list  *my_pop_last(t_list *list) 
+t_list  *my_pop_last(t_list **list, int *size) 
 {
     t_list  *pop;
+    t_list  *lst;
 
-    if (!list || !(list -> next))
-        return (list);
-    while (list -> next -> next)
-        list = list -> next;
-    pop = list -> next;
-    list -> next = NULL;
+    lst = *list;
+    if (!lst)
+        return (lst);
+    (*size)--;
+    if(!(lst -> next))
+    {
+        *list = NULL;
+        return (lst);
+    }
+    while (lst -> next -> next)
+        lst = lst -> next;
+    pop = lst -> next;
+    lst -> next = NULL;
+    //info -> last = lst -> data;
     return (pop);
 }
 //swap 2 top elements
@@ -86,28 +108,11 @@ void    my_swap(t_list **list)
 //check if list is sorted
 int my_issorted(t_list *lst)
 {
-    while (lst -> next)
+    while (lst && lst -> next)
     {
         if (lst -> data > lst -> next -> data)
             return (0);
         lst = lst -> next;
     }
     return (1);
-}
-
-int min_last(t_list *list, int *min)
-{
-    int i ;
-    int last;
-    
-    i = list -> data;
-    last = i;
-    while (list -> next)
-    {
-        list = list -> next;
-        i = ((i * (i < list -> data)) + (list -> data * (i > list -> data))); //min of i & last->data
-        last = list -> data;
-    }
-    (*min) = i;
-    return (last);
 }

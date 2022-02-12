@@ -43,47 +43,28 @@ void	my_putstr(char *s1, short check)
 	s2 = s1;
 }
 
-/************************************LIBFT********************************/
-//put string
-int my_strcmp(char *s1, char *s2)
+int	max_value(int *size)
 {
-    while (*s1 && *s2 && *s1 == *s2)
-    {
-        s1++;
-        s2++;
-    }
-    return (*s1 - *s2);
+	static int i;
+
+	if ((*size) > 100)
+		i += (*size / 8);
+	//else if ((*size) == 100)
+		//i += ((*size) / 4);
+	//else if ((*size) > 50)*/
+	else
+		i += ((*size) / 3);
+	//i += 20;
+	/*else
+		i += ((*size) / 2);*/
+	if (i >= (size[0] + size[1]) || *size < 25)
+		return ((size[0] + size[1]) - 3);
+	return (i);
 }
 
-void	ft_putstr_fd(char *s, int fd)
+int my_abs(int n)
 {
-	if (s)
-	{
-		while (*s)
-		{
-			write(fd, s, 1);
-			s++;
-		}
-	}
+    if (n > 0)
+        return n + 1;
+    return n * -1;
 }
-//convert string to integer
-int my_atoi(char *str)
-{
-    unsigned int	n;
-	int symbole;
-
-	n = 0;
-	symbole = 1;
-	if (*str == '-')
-		symbole = -1;
-	if (*str == '+' || *str == '-')
-		str++;
-	while (*str > 47 && *str < 58)
-	{
-		n = n * 10 + *str - 48;
-		str++;
-	}
-	return (symbole * n);
-}
-
-
