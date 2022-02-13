@@ -20,7 +20,7 @@ t_list  *my_check(int ac, char **av, int *size)
     if (ac == 2)
         av = ft_split(*av, ' ');
     if (!av)
-        exit(0);
+        exit (0);
     a = NULL;
     while (*av)
     {
@@ -30,22 +30,21 @@ t_list  *my_check(int ac, char **av, int *size)
             ft_putstr_fd("Error\n", 2);
             exit (0);
         }
-        my_push_back(&a, b, size);
+        my_push_back(&a, b);
+        (*size)++;
     }
-    if (!a || *size == 1 || my_issorted(a))
-        exit(0);
     return (a);
 }
 
 /************************************************************************/
-void    put_index(t_list *a, int *size)
+void    put_index(t_list *a, int size)
 {
     int i;
     t_list *min;
     t_list *check;
 
     i = 0;
-    while (i < *size)
+    while (i < size)
     {
         min = a;
         check = a -> next;

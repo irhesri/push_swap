@@ -9,7 +9,7 @@ void    switch_case(char *str, t_list **a, t_list **b)
     else if (!my_strcmp(str, "ra\n") || !my_strcmp(str, "rb\n"))
         my_push_back(a, my_pop(a));
     else if (!my_strcmp(str, "rra\n") || !my_strcmp(str, "rrb\n"))
-        my_push(a, my_pop_last(*a));
+        my_push(a, my_pop_last(a));
     else if (!my_strcmp(str, "ss\n"))
     {
         my_swap(a);
@@ -22,8 +22,13 @@ void    switch_case(char *str, t_list **a, t_list **b)
     }
     else if (!my_strcmp(str, "rrr\n"))
     {
-        my_push(a, my_pop_last(*a));
-        my_push_back(b, my_pop_last(*b));
+        my_push(a, my_pop_last(a));
+        my_push_back(b, my_pop_last(b));
+    }
+    else
+    {
+        ft_putstr_fd("Error\n", 2);
+        exit (0);
     }
 }
 
@@ -31,17 +36,15 @@ int main(int ac, char **av)
 {
     t_list  *a;
     t_list  *b;
+    int     size;
     char    *str;
 
     a = NULL;
-    b = NULL;
+    size = 0;
     //check typing errors duplicate number or non-digits 
-    if (!my_check(ac, av, &a))
-        return (0);
-
+    a = my_check(ac, av, &size);
+    b = NULL;
     str = get_next_line(0);
-        ft_putstr_fd(str, 1);
-
     while (str)
     {
         if (str[1] == 'a' || str[2] == 'a')
@@ -50,7 +53,6 @@ int main(int ac, char **av)
             switch_case(str, &b, &a);
         free(str);
         str = get_next_line(0);
-        ft_putstr_fd(str, 1);
     }
     
     //my_print(a);

@@ -43,25 +43,6 @@ void	my_putstr(char *s1, short check)
 	s2 = s1;
 }
 
-int	max_value(int *size)
-{
-	static int i;
-
-	if ((*size) > 100)
-		i += (*size / 8);
-	//else if ((*size) == 100)
-		//i += ((*size) / 4);
-	//else if ((*size) > 50)*/
-	else
-		i += ((*size) / 3);
-	//i += 20;
-	/*else
-		i += ((*size) / 2);*/
-	if (i >= (size[0] + size[1]) || *size < 25)
-		return ((size[0] + size[1]) - 3);
-	return (i);
-}
-
 int my_abs(int n)
 {
     if (n > 0)

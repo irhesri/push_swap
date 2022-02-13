@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int node_index(t_list *a, int max)
+static int node_position(t_list *a, int max, int min)
 {
     int i;
     int t[4];
@@ -9,7 +9,7 @@ int node_index(t_list *a, int max)
     t[0] = 0;
     while (a)
     {
-        if (a -> index <= max)
+        if (a -> index <= max && a -> index >= min)
         {
             if (!t[0])
             {
@@ -32,17 +32,17 @@ int node_index(t_list *a, int max)
     return (i);
 }
 
-static void move_up(t_list **a, int *size, int i)
+static void move_up(t_list **a, int i)
 {
     while (i < 0)
     {
-        my_push(a, my_pop_last(a, size), size);
+        my_push(a, my_pop_last(a));
         my_putstr("rra", 0);
         i++;
     }
     while (i > 2)
     {
-        my_push_back(a, my_pop(a, size), size);
+        my_push_back(a, my_pop(a));
         my_putstr("ra", 1);
         i--;
     }
@@ -53,32 +53,48 @@ static void move_up(t_list **a, int *size, int i)
     }
 }
 
-void    list_sort(t_list **a, t_list **b, int *size)
+static int	set_length(int size)
+{
+    static int k;
+
+    k++;
+	if (size > 150)
+		return (k * size / 18);
+	return (k * size / 8);
+}
+
+void    list_sort(t_list **a, t_list **b, int size)
 {
     int i;
-    int x;
-
-    while (size[0] > 3)
+    int max; 
+    int min;
+    int x; 
+    
+    x = set_length(size); 
+    max = size / 2 + x;
+    min = size / 2 - x;
+    i = node_position(*a, max, min);
+    while (i)
     {
-        x = max_value(size);
-        i = node_index(*a, x);
-        while (i)
+        move_up(a, i);
+        my_push(b, my_pop(a));
+        my_putstr("pb", 0);
+        if ((*b) -> index < (size / 2))
         {
-            move_up(a, size, i);
-            my_push(b, my_pop(a, size), size + 1);
-            my_putstr("pb", 0);
-            i = node_index(*a, x);
+            my_push_back(b, my_pop(b));
+            my_putstr("rb", 1);
         }
+        i = node_position(*a, max, min);
     }
 }
 
-void    sort_3(t_list **a, int *size)
+void    sort_3(t_list **a, int size)
 {
     while (!my_issorted(*a))
     {
-        if (*size > 2 && (*a) -> data > (*a) -> next -> next -> data)
+        if (size > 2 && (*a) -> data > (*a) -> next -> next -> data)
         {
-            my_push_back(a, my_pop(a, size), size);
+            my_push_back(a, my_pop(a));
             my_putstr("ra", 1);
         }
         else

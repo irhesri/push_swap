@@ -13,43 +13,37 @@ t_list  *initialise(int data)
     return (lst);
 }
 
-void    my_push(t_list **list, t_list *new, int *size)
+void    my_push(t_list **list, t_list *new)
 {
     if (!new)
         return ;
     if (!*list)
     {
         *list = new;
-        //info -> last = new -> data;
-        (*size) = 1;
         return ;
     }
-    (*size)++;
     new -> next = *list;
     *list = new;
 }
 
-void    my_push_back(t_list **list, t_list *new, int *size)
+void    my_push_back(t_list **list, t_list *new)
 {
     t_list *lst;
 
     if (!new)
         return ;
-    //info -> last = new -> data;
     if (!*list)
     {
         *list = new;
-        (*size) = 1;
         return ;
     }
-    (*size)++;
     lst = *list;
     while (lst -> next)
         lst = lst -> next;
     lst -> next = new;
 }
 //remove and return front 
-t_list  *my_pop(t_list **list, int *size) 
+t_list  *my_pop(t_list **list) 
 {
     t_list *lst;
 
@@ -58,11 +52,10 @@ t_list  *my_pop(t_list **list, int *size)
         return (NULL);
     *list = (*list) -> next;
     lst -> next = NULL;
-    (*size)--;
     return (lst);
 }
 
-t_list  *my_pop_last(t_list **list, int *size) 
+t_list  *my_pop_last(t_list **list) 
 {
     t_list  *pop;
     t_list  *lst;
@@ -70,7 +63,6 @@ t_list  *my_pop_last(t_list **list, int *size)
     lst = *list;
     if (!lst)
         return (lst);
-    (*size)--;
     if(!(lst -> next))
     {
         *list = NULL;
@@ -80,7 +72,6 @@ t_list  *my_pop_last(t_list **list, int *size)
         lst = lst -> next;
     pop = lst -> next;
     lst -> next = NULL;
-    //info -> last = lst -> data;
     return (pop);
 }
 //swap 2 top elements
