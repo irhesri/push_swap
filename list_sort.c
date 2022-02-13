@@ -40,27 +40,22 @@ static void move_up(t_list **a, int i)
         my_putstr("rra", 0);
         i++;
     }
-    while (i > 2)
+    while (i >= 2)
     {
         my_push_back(a, my_pop(a));
         my_putstr("ra", 1);
         i--;
-    }
-    if (i == 2)
-    {
-        my_swap(a);
-        my_putstr("sa", 2);
     }
 }
 
 static int	set_length(int size)
 {
     static int k;
-
+    static int x = 12;
     k++;
 	if (size > 150)
 		return (k * size / 18);
-	return (k * size / 8);
+	return (k * x);
 }
 
 void    list_sort(t_list **a, t_list **b, int size)
