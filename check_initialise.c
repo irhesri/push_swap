@@ -22,14 +22,11 @@ t_list	*my_check(int ac, char **av, int *size)
 	if (!av)
 		exit (0);
 	a = NULL;
-	while (*av)
+	while (*av || !a)
 	{
-		b = initialise(my_atoi(*av++));
-		if (duplicate_check(a, b))
-		{
-			ft_putstr_fd("Error\n", 2);
-			exit (0);
-		}
+		b = initialise(my_atoi(*av));
+		if (!*av++ || duplicate_check(a, b))
+			error_case();
 		my_push_back(&a, b);
 		(*size)++;
 	}

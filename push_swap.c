@@ -8,6 +8,8 @@ int	main(int ac, char **av)
 
 	b = NULL;
 	size = 0;
+	if (ac == 1)
+		exit (0);
 	a = my_check(ac, av, &size);
 	if (size == 1 || my_issorted(a))
 		exit(0);

@@ -15,7 +15,7 @@ typedef struct s_list
 
 void    put_index(t_list *a, int size);
 void    sort_3(t_list **a, int size);
-int my_abs(int n);
+int     my_abs(int n);
 //list
 t_list  *initialise(int data);
 t_list  *my_pop(t_list **list);
@@ -27,10 +27,10 @@ int     my_issorted(t_list *list);
 
 //new functions
 t_list  *my_check(int ac, char **av, int *size);
+void	error_case(void);
 void	my_putstr(char *s1, short check);
 int	    max_value(int *size);
 void    list_sort(t_list **a, t_list **b, int size);
-//void    push_in_b(t_list **a, t_list **b, t_info *info_a, t_info *info_b);
 
 /***************************************************LIBFT***************************************/
 void	ft_putstr_fd(char *s, int fd);

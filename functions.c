@@ -49,3 +49,9 @@ int my_abs(int n)
         return n + 1;
     return n * -1;
 }
+
+void	error_case(void)
+{
+	ft_putstr_fd("Error\n", 2);
+    exit (0);
+}

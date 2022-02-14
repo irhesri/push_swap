@@ -90,7 +90,7 @@ static	char	**my_alloc(char **str, int *t)
 					while (--i)
 						free(str[i]);
 					free(str);
-					str = NULL;
+					exit (0);
 					break ;
 				}
 				i++;
@@ -141,7 +141,7 @@ char	**ft_split(char const *s, char c)
 		my_size(t, s, c, size);
 		str = my_alloc(str, t);
 		if (!str)
-			return (NULL);
+			exit (0);
 		my_assignment(str, s, c, t);
 		free(t);
 		return (str);
@@ -180,9 +180,11 @@ int my_atoi(char *str)
 
 	n = 0;
 	symbole = 1;
+	if (!str)
+		error_case();
 	if (*str == '-')
 		symbole = -1;
-	if (*str == '+' || *str == '-')
+	if ((*str == '+' || *str == '-') && *(str + 1))
 		str++;
 	while (*str > 47 && *str < 58 && (n < 2147483648))
 	{
@@ -191,9 +193,6 @@ int my_atoi(char *str)
 	}
 	if (*str || (n >= 2147483648 && symbole == 1) 
 		|| (n > 2147483648 && symbole == -1))
-	{
-		ft_putstr_fd("Error\n", 2);
-        exit (0);
-	}
+		error_case();
 	return (symbole * n);
 }
