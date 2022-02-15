@@ -25,22 +25,22 @@ static void	node_position(t_list *a, int *n_index)
 	int	i;
 
 	i = 0;
-	data[0] = a -> data;
-	data[1] = a -> data;
-	while (a -> next)
+	data[0] = a->data;
+	data[1] = a->data;
+	while (a->next)
 	{
-		a = a -> next;
+		a = a->next;
 		i++;
-		if (a -> data > data[1])
+		if (a->data > data[1])
 		{
 			data[0] = data[1];
 			n_index[0] = n_index[1];
-			data[1] = a -> data;
+			data[1] = a->data;
 			n_index[1] = i;
 		}
-		else if (a -> data > data[0])
+		else if (a->data > data[0])
 		{
-			data[0] = a -> data;
+			data[0] = a->data;
 			n_index[0] = i;
 		}
 	}
@@ -94,7 +94,7 @@ void	empty_b(t_list **a, t_list **b, int *size)
 
 	i = max_index(*b, *size);
 	move_up(b, i);
-	if ((*a) && (*a)-> next && (*a)-> data > (*a)-> next -> data)
+	if ((*a) && (*a)->next && (*a)->data > (*a)->next->data)
 	{
 		my_swap(a);
 		my_putstr("sa", 2);

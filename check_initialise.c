@@ -16,9 +16,9 @@ static	int	duplicate_check(t_list *a, t_list *new)
 {
 	while (a)
 	{
-		if (a -> data == new -> data)
+		if (a->data == new->data)
 			return (1);
-		a = a -> next;
+		a = a->next;
 	}
 	return (0);
 }

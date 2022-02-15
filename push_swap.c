@@ -30,10 +30,10 @@ int	main(int ac, char **av)
 			list_sort(&a, &b, size);
 	}
 	else
-		sort_5(&a, &b,  size);
+		sort_5(&a, &b, size);
 	while (b)
 		empty_b(&a, &b, &size);
-	if (a && a -> next && a -> data > a -> next -> data)
+	if (a && a->next && a->data > a->next->data)
 	{
 		my_swap(&a);
 		my_putstr("sa", 2);

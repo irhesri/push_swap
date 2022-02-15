@@ -21,13 +21,13 @@ static int	node_position(t_list *a, int max, int min)
 	position = 0;
 	while (a)
 	{
-		if (a -> index <= max && a -> index >= min)
+		if (a->index <= max && a->index >= min)
 		{
 			position = i + 1;
 			break ;
 		}
 		i++;
-		a = a -> next;
+		a = a->next;
 	}
 	if (!position)
 		return (0);
@@ -52,7 +52,7 @@ static int	set_length(int size)
 void	list_sort(t_list **a, t_list **b, int size)
 {
 	int	i;
-	int	x;
+	int	x;   
 
 	x = set_length(size);
 	i = node_position(*a, (size / 2 + x), (size / 2 - x));
@@ -66,7 +66,7 @@ void	list_sort(t_list **a, t_list **b, int size)
 		}
 		my_push(b, my_pop(a));
 		my_putstr("pb", 0);
-		if ((*b)-> index < (size / 2))
+		if ((*b)->index < (size / 2))
 		{
 			my_push_back(b, my_pop(b));
 			my_putstr("rb", 1);
@@ -79,7 +79,7 @@ static void	sort_3(t_list **a, int size)
 {
 	while (!my_issorted(*a))
 	{
-		if (size > 2 && (*a)-> data > (*a)-> next -> next -> data)
+		if (size > 2 && (*a)->data > (*a)->next->next->data)
 		{
 			my_push_back(a, my_pop(a));
 			my_putstr("ra", 1);

@@ -17,21 +17,21 @@ void	my_swap(t_list **list)
 	t_list	*lst;
 
 	lst = *list;
-	if (!lst || !lst -> next)
+	if (!lst || !lst->next)
 		return ;
-	*list = (*list)-> next;
-	lst -> next = (*list)-> next;
-	(*list)-> next = lst;
+	*list = (*list)->next;
+	lst->next = (*list)->next;
+	(*list)->next = lst;
 }
 
 //check if list is sorted
 int	my_issorted(t_list *lst)
 {
-	while (lst && lst -> next)
+	while (lst && lst->next)
 	{
-		if (lst -> data > lst -> next -> data)
+		if (lst->data > lst->next->data)
 			return (0);
-		lst = lst -> next;
+		lst = lst->next;
 	}
 	return (1);
 }
@@ -46,14 +46,14 @@ void	put_index(t_list *a, int size)
 	while (i < size)
 	{
 		min = a;
-		check = a -> next;
+		check = a->next;
 		while (check)
 		{
-			if ((!check -> index && min -> data > check -> data)
-				|| (min -> index))
+			if ((!check->index && min->data > check->data)
+				|| (min->index))
 				min = check;
-			check = check -> next;
+			check = check->next;
 		}
-		min -> index = ++i;
+		min->index = ++i;
 	}
 }
