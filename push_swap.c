@@ -29,7 +29,8 @@ int	main(int ac, char **av)
 		while (a)
 			list_sort(&a, &b, size);
 	}
-	sort_5(&a, &b,  size);
+	else
+		sort_5(&a, &b,  size);
 	while (b)
 		empty_b(&a, &b, &size);
 	if (a && a -> next && a -> data > a -> next -> data)
