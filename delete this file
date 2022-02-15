@@ -1,0 +1,40 @@
+/*
+int	max_index(t_list *a, int size)
+{
+	int			i;
+	static int	b;
+	int			t[4] = {0};
+
+	i = 0;
+	t[3] = a -> data;
+	t[1] = t[3];
+	while (a -> next) *** put it in another function***
+	{
+		a = a -> next;
+		i++;
+		if (a -> data > t[3])
+		{
+			t[1] = t[3];
+			t[0] = t[2];
+			t[3] = a -> data;
+			t[2] = i;
+		}
+		else if (a -> data > t[1])
+		{
+			t[1] = a -> data;
+			t[0] = i;
+		}
+	}
+	i++;
+	if (t[2] > (size / 2 + 1))
+		t[2] -= i;
+	if (t[0] > (size / 2 + 1))
+		t[0] -= i;
+	if (!b && my_abs(t[0]) < my_abs(t[2]))
+	{
+		b = 1;
+		return (t[0]);
+	}
+	b = 0;
+	return (t[2]);
+}*/

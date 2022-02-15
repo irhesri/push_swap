@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: irhesri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/15 13:40:39 by irhesri           #+#    #+#             */
+/*   Updated: 2022/02/15 13:40:42 by irhesri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static	void	change_both(char *str, t_list **a, t_list **b)
 {
-	else if (!my_strcmp(str, "ss\n"))
+	if (!my_strcmp(str, "ss\n"))
 	{
 		my_swap(a);
 		my_swap(b);
@@ -32,10 +44,15 @@ static	void	switch_case(char *str, t_list **a, t_list **b)
 	else if (*str == 's' || *str == 'r')
 		change_both(str, a, b);
 	else
-	{
-		ft_putstr_fd("Error\n", 2);
-		exit (0);
-	}
+		error_case();
+}
+
+static void	print_output(int b)
+{
+	if (b)
+		ft_putstr_fd("OK\n", 1);
+	else
+		ft_putstr_fd("KO\n", 1);
 }
 
 int	main(int ac, char **av)
@@ -45,10 +62,14 @@ int	main(int ac, char **av)
 	int		size;
 	char	*str;
 
+	if (ac == 1)
+		exit (0);
 	size = 0;
 	b = NULL;
 	a = my_check(ac, av, &size);
 	str = get_next_line(0);
+	if (str && !*str)
+		error_case();
 	while (str)
 	{
 		if (str[1] == 'a' || str[2] == 'a')
@@ -58,9 +79,6 @@ int	main(int ac, char **av)
 		free(str);
 		str = get_next_line(0);
 	}
-	if (my_issorted(a) && !b)
-		ft_putstr_fd("OK\n", 1);
-	else
-		ft_putstr_fd("KO\n", 1);
+	print_output(my_issorted(a) && !b);
 	return (0);
 }

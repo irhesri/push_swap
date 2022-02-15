@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_initialise.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: irhesri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/15 13:43:28 by irhesri           #+#    #+#             */
+/*   Updated: 2022/02/15 13:43:30 by irhesri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static	int	duplicate_check(t_list *a, t_list *new)
@@ -13,13 +25,13 @@ static	int	duplicate_check(t_list *a, t_list *new)
 
 t_list	*my_check(int ac, char **av, int *size)
 {
-	t_list  *a;
-	t_list  *b;
+	t_list	*a;
+	t_list	*b;
 
 	av++;
 	if (ac == 2)
 		av = ft_split(*av, ' ');
-	if (!av)
+	if (!av || ac == 1)
 		exit (0);
 	a = NULL;
 	while (*av || !a)
@@ -33,26 +45,4 @@ t_list	*my_check(int ac, char **av, int *size)
 	if (!a)
 		exit(0);
 	return (a);
-}
-
-void	put_index(t_list *a, int size)
-{
-	int		i;
-	t_list	*min;
-	t_list	*check;
-
-	i = 0;
-	while (i < size)
-	{
-		min = a;
-		check = a -> next;
-		while (check)
-		{
-			if ((!check -> index && min -> data > check -> data) 
-				|| (min -> index))
-				min = check;
-            check = check -> next;
-        }
-		min -> index = ++i;
-	}
 }
