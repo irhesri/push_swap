@@ -5,7 +5,7 @@ int max_index(t_list *a, int size)
     int i;
     static int b=0;
     int t[4] = {0};
-
+    int position = 0;
     i = 0;
 
     t[3] = a -> data;
@@ -53,17 +53,17 @@ void    empty_b(t_list **a, t_list **b, int *size)
             my_putstr("rrb", 0);
             i++;
         }
-        while (i >= 1)
+        while (i > 1)
         {
             my_push_back(b, my_pop(b));
             my_putstr("rb", 1);
             i--;
         }
-        /*if (i == 1)
+        if (i == 1)
         {
             my_swap(b);
             my_putstr("sb", 2);
-        }*/
+        }
         if ((*a) && (*a) -> next && (*a) -> data > (*a) -> next -> data)
         {
             my_swap(a);

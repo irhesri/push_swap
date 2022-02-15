@@ -3,56 +3,35 @@
 static int node_position(t_list *a, int max, int min)
 {
     int i;
-    int t[4];
+    int position;
     
     i = 0;
-    t[0] = 0;
+    position = 0;
     while (a)
     {
         if (a -> index <= max && a -> index >= min)
         {
-            if (!t[0])
-            {
-                t[0] = i + 1;
-                t[1] = a -> data;
-            }
-            t[2] = i;
-            t[3] = a -> data;
+            position = i + 1;
+            break;
         }
         i++;
         a = a -> next;
     }
-    if (!t[0])
+    if (!position)
         return (0);
-    t[2] -= i;
-    if ((my_abs(t[0]) - 1) == my_abs(t[2]))
-        return ((t[0] * (t[1] <= t[3])) + (t[2] * (t[1] > t[3])));
-    i = t[2] * -1;
-    i = t[0] * (i >= t[0]) + t[2] * (i < t[0]);
-    return (i);
-}
-
-static void move_up(t_list **a, int i)
-{
-    while (i < 0)
-    {
-        my_push(a, my_pop_last(a));
-        my_putstr("rra", 0);
-        i++;
-    }
-    while (i >= 2)
-    {
-        my_push_back(a, my_pop(a));
-        my_putstr("ra", 1);
-        i--;
-    }
+    return (position);
 }
 
 static int	set_length(int size)
 {
     static int k;
-    static int x = 12;
+    static int x;
+
     k++;
+    if (!x && size < 150)
+        x = 12;
+    else if (!x)
+        x = 20;
 	if (size > 150)
 		return (k * size / 18);
 	return (k * x);
@@ -71,7 +50,12 @@ void    list_sort(t_list **a, t_list **b, int size)
     i = node_position(*a, max, min);
     while (i)
     {
-        move_up(a, i);
+        while (i >= 2)
+        {
+            my_push_back(a, my_pop(a));
+            my_putstr("ra", 1);
+        i--;
+        }
         my_push(b, my_pop(a));
         my_putstr("pb", 0);
         if ((*b) -> index < (size / 2))
