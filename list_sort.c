@@ -52,7 +52,7 @@ static int	set_length(int size)
 void	list_sort(t_list **a, t_list **b, int size)
 {
 	int	i;
-	int	x;   
+	int	x;
 
 	x = set_length(size);
 	i = node_position(*a, (size / 2 + x), (size / 2 - x));

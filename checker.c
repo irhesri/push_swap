@@ -44,7 +44,7 @@ static	void	switch_case(char *str, t_list **a, t_list **b)
 	else if (*str == 's' || *str == 'r')
 		change_both(str, a, b);
 	else
-		error_case();
+		exit (ft_putstr_fd("Error\n", 2));
 }
 
 static void	print_output(int b)
@@ -69,7 +69,7 @@ int	main(int ac, char **av)
 	a = my_check(ac, av, &size);
 	str = get_next_line(0);
 	if (str && !*str)
-		error_case();
+		exit (ft_putstr_fd("Error\n", 2));
 	while (str)
 	{
 		if (str[1] == 'a' || str[2] == 'a')

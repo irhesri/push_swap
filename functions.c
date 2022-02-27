@@ -54,9 +54,3 @@ void	my_putstr(char *s1, short check)
 	write(1, "\n", 1);
 	s2 = s1;
 }
-
-void	error_case(void)
-{
-	ft_putstr_fd("Error\n", 2);
-	exit (0);
-}

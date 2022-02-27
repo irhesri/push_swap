@@ -32,7 +32,7 @@ int	my_strcmp(char *s1, char *s2)
 	return (*s1 - *s2);
 }
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_putstr_fd(char *s, int fd)
 {
 	if (s)
 	{
@@ -42,6 +42,7 @@ void	ft_putstr_fd(char *s, int fd)
 			s++;
 		}
 	}
+	return (0);
 }
 
 int	my_atoi(char *str)
@@ -52,7 +53,7 @@ int	my_atoi(char *str)
 	n = 0;
 	symbole = 1;
 	if (!str)
-		error_case();
+		exit (ft_putstr_fd("Error\n", 2));
 	if (*str == '-')
 		symbole = -1;
 	if ((*str == '+' || *str == '-') && *(str + 1))
@@ -64,6 +65,6 @@ int	my_atoi(char *str)
 	}
 	if (*str || (n >= 2147483648 && symbole == 1)
 		|| (n > 2147483648 && symbole == -1))
-		error_case();
+		exit (ft_putstr_fd("Error\n", 2));
 	return (symbole * n);
 }

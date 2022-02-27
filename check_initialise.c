@@ -27,20 +27,24 @@ t_list	*my_check(int ac, char **av, int *size)
 {
 	t_list	*a;
 	t_list	*b;
+	char	**list;
 
 	av++;
-	if (ac == 2)
-		av = ft_split(*av, ' ');
-	if (!av || ac == 1)
-		exit (0);
 	a = NULL;
-	while (*av || !a)
+	while (ac-- && *av)
 	{
-		b = initialise(my_atoi(*av));
-		if (!*av++ || duplicate_check(a, b))
-			error_case();
-		my_push_back(&a, b);
-		(*size)++;
+		list = ft_split(*av, ' ');
+		if (!list)
+			exit (0);
+		while (*list || !a)
+		{
+			b = initialise(my_atoi(*list));
+			if (!*list++ || duplicate_check(a, b))
+				exit (ft_putstr_fd("Error\n", 2));
+			my_push_back(&a, b);
+			(*size)++;
+		}
+		av++;
 	}
 	if (!a)
 		exit(0);
