@@ -12,26 +12,55 @@
 
 #include "push_swap.h"
 
-static int	node_position(t_list *a, int max, int min)
+// static int	node_position(t_list *a, int max, int min, int len)
+// {
+// 	int	i;
+// 	int	position;
+
+// 	i = 0;
+// 	position = 0;
+// 	while (a)
+// 	{
+// 		if (a->index <= max && a->index >= min)
+// 		{
+// 			position = i + 1;
+// 			if (i + 1 < (len / 2))
+// 				break ;
+// 			else
+// 				position = len - position + 1;
+// 		}
+// 		i++;
+// 		a = a->next;
+// 	}
+// 	if (!position)
+// 		return (0);
+// 	return (position);
+// }
+static int	node_position(t_list *a, int max, int min, int len)
 {
 	int	i;
-	int	position;
+	int	first;
+	int	last;
 
 	i = 0;
-	position = 0;
+	first = 0;
+	last = 0;
 	while (a)
 	{
 		if (a->index <= max && a->index >= min)
 		{
-			position = i + 1;
-			break ;
+			if (!first)
+				first = i + 1;
+			last = i + 1;
 		}
 		i++;
 		a = a->next;
 	}
-	if (!position)
+	if (first > (i / 2))
+		return (i - last + 1);
+	if (!first)
 		return (0);
-	return (position);
+	return (first);
 }
 
 static int	set_length(int size)
@@ -49,21 +78,32 @@ static int	set_length(int size)
 	return (k * x);
 }
 
+static void	move_up(t_list **a, int i)
+{
+	while (i >= 2)
+	{
+		my_push_back(a, my_pop(a));
+		my_putstr("ra", 1);
+		i--;
+	}
+	while (i < 0)
+	{
+		my_push(a, my_pop_last(a));
+		my_putstr("rra", 0);
+		i++;
+	}
+}
+
 void	list_sort(t_list **a, t_list **b, int size)
 {
 	int	i;
 	int	x;
 
 	x = set_length(size);
-	i = node_position(*a, (size / 2 + x), (size / 2 - x));
+	i = node_position(*a, (size / 2 + x), (size / 2 - x), size);
 	while (i)
 	{
-		while (i >= 2)
-		{
-			my_push_back(a, my_pop(a));
-			my_putstr("ra", 1);
-			i--;
-		}
+		move_up(a, i);
 		my_push(b, my_pop(a));
 		my_putstr("pb", 0);
 		if ((*b)->index < (size / 2))
@@ -71,51 +111,6 @@ void	list_sort(t_list **a, t_list **b, int size)
 			my_push_back(b, my_pop(b));
 			my_putstr("rb", 1);
 		}
-		i = node_position(*a, (size / 2 + x), (size / 2 - x));
+		i = node_position(*a, (size / 2 + x), (size / 2 - x), size);
 	}
-}
-
-static void	sort_3(t_list **a, int size)
-{
-	while (!my_issorted(*a))
-	{
-		if (size > 2 && (*a)->data > (*a)->next->next->data)
-		{
-			my_push_back(a, my_pop(a));
-			my_putstr("ra", 1);
-		}
-		else
-		{
-			my_swap(a);
-			my_putstr("sa", 2);
-		}
-	}
-}
-
-void	sort_5(t_list **a, t_list **b, int size)
-{
-	int	i;
-
-	while (size > 3)
-	{
-		i = node_position(*a, 2, 1);
-		if ((i - 1) > (size / 2))
-			i -= (size + 1);
-		while (i < 0)
-		{
-			my_push(a, my_pop_last(a));
-			my_putstr("rra", 0);
-			i++;
-		}
-		while (i > 1)
-		{
-			my_push_back(a, my_pop(a));
-			my_putstr("ra", 1);
-			i--;
-		}
-		my_push(b, my_pop(a));
-		my_putstr("pb", 0);
-		size--;
-	}
-	sort_3(a, size);
 }

@@ -40,7 +40,7 @@ void	my_putstr(char *s1, short check);
 //sort
 void	list_sort(t_list **a, t_list **b, int size);
 void	empty_b(t_list **a, t_list **b, int *size);
-void	sort_5(t_list **a, t_list **b, int size);
+void	sort_small_list(t_list **a, t_list **b, int size);
 //libft
 int		ft_putstr_fd(char *s, int fd);
 int		my_atoi(char *str);
