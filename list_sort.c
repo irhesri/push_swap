@@ -73,8 +73,6 @@ static int	set_length(int size)
 		x = 12;
 	else if (!x)
 		x = 30;
-	if (size > 150)
-		return (k * x);
 	return (k * x);
 }
 
