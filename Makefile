@@ -2,10 +2,10 @@ NAME = push_swap
 NAME_B = checker
 FLAGS = -Wall -Wextra -Werror 
 BOTH = check_initialise.c list_functions.c list_functions_2.c libft.c ft_split.c functions.c
-MANDATORY = push_swap.c list_sort.c list_sort_2.c empty.c 
+MANDATORY = push_swap.c list_sort.c empty.c 
 BONUS = checker.c get_next_line.c
 
-all: $(NAME) $(NAME_B)
+all: $(NAME)
 
 $(NAME): $(BOTH:.c=.o) $(MANDATORY:.c=.o) 
 

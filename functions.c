@@ -12,43 +12,37 @@
 
 #include "push_swap.h"
 
-static int	is_rotate(char *str)
+static int	a_b_check(char c)
 {
-	if (!(my_strcmp(str, "ra")))
+	if (c == 'a')
 		return (1);
-	if (!(my_strcmp(str, "rb")))
+	if (c == 'b')
 		return (-1);
 	return (2);
 }
 
-static int	is_swap(char *str)
-{
-	if (!(my_strcmp(str, "sa")))
-		return (1);
-	if (!(my_strcmp(str, "sb")))
-		return (-1);
-	return (2);
-}
-
-//prints s2 and store s1 in s2
 void	my_putstr(char *s1, short check)
 {
 	static char	*s2;
+	int			i;
 
+	i = 0;
 	if (!s2)
 	{
 		s2 = s1;
 		return ;
 	}
-	if (check == 1 && !(is_rotate(s1) + is_rotate(s2)))
-	{	
-		s1 = NULL;
-		s2 = "rr";
-	}
-	else if (check == 2 && !(is_swap(s1) + is_swap(s2)))
-	{	
-		s1 = NULL;
-		s2 = "ss";
+	if (s1 && s1[i] == s2[i] && ++i)
+	{
+		s1[i] == s2[i] && (i++);
+		if (!(a_b_check(s1[i]) + a_b_check(s2[i])))
+		{
+			s2 = NULL;
+			while (i-- > -1 && (s1[0] != 'p'))
+				write(1, &s1[0], 1);
+			(s1[0] != 'p') && write(1, "\n", 1);
+			return ;
+		}
 	}
 	ft_putstr_fd(s2, 1);
 	write(1, "\n", 1);

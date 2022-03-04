@@ -24,13 +24,10 @@ int	main(int ac, char **av)
 	if (size == 1 || my_issorted(a))
 		exit(0);
 	put_index(a, size);
-	if (size > 10)
-	{
-		while (a)
-			list_sort(&a, &b, size);
-	}
-	else
-		sort_small_list(&a, &b, size);
+	while (size > 3 && a->next->next->next)
+		list_sort(&a, &b, size);
+	sort_3(&a, 3);
+	size -= 3;
 	while (b)
 		empty_b(&a, &b, &size);
 	if (a && a->next && a->data > a->next->data)
