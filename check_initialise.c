@@ -40,7 +40,7 @@ t_list	*my_check(int ac, char **av, int *size)
 		{
 			b = initialise(my_atoi(*list));
 			if (!*list++ || duplicate_check(a, b))
-				exit (ft_putstr_fd("Error\n", 2));
+				exit (ft_putstr("Error\n", 2));
 			my_push_back(&a, b);
 			(*size)++;
 		}

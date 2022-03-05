@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 	if (size == 1 || my_issorted(a))
 		exit(0);
 	put_index(a, size);
-	while (size > 3 && a->next->next->next)
+	if (size > 3)
 		list_sort(&a, &b, size);
 	sort_3(&a, 3);
 	size -= 3;

@@ -59,21 +59,23 @@ char	*read_next_line(char *str, int fd)
 	int		size;
 
 	size = 0;
-	s = NULL;
-	s = ft_endlsplit(s, str, &size);
+	s = ft_endlsplit(NULL, str, &size);
 	if (s[size - 1] == '\n')
+	{
+		s[size - 1] = '\0';
 		return (s);
-	len = 1;
+	}
+	len = read(fd, str, 100);
 	while (len > 0)
 	{
-		len = read(fd, str, 100);
-		if (len > 0)
+		str[len] = '\0';
+		s = ft_endlsplit(s, str, &size);
+		if (s[size - 1] == '\n')
 		{
-			str[len] = '\0';
-			s = ft_endlsplit(s, str, &size);
-			if (s[size - 1] == '\n')
-				return (s);
+			s[size - 1] = '\0';
+			return (s);
 		}
+		len = read(fd, str, 100);
 	}
 	return (s);
 }

@@ -44,7 +44,7 @@ void	my_putstr(char *s1, short check)
 			return ;
 		}
 	}
-	ft_putstr_fd(s2, 1);
+	ft_putstr(s2, 1);
 	write(1, "\n", 1);
 	s2 = s1;
 }

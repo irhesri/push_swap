@@ -126,7 +126,7 @@ char	**ft_split(char const *s, char c)
 	if (s)
 	{
 		if (!*s)
-			exit (ft_putstr_fd("Error\n", 2));
+			exit (ft_putstr("Error\n", 2));
 		str = NULL;
 		size = ft_strlen(s);
 		t = (int *) malloc(sizeof(int) * (size / 2 + 2));
