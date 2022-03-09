@@ -71,20 +71,20 @@ static void	move_up(t_list **b, int i)
 {
 	while (i < 0)
 	{
-		my_push(b, my_pop_last(b));
-		my_putstr("rrb", 0);
+		my_rrotate(b);
+		my_putstr("rrb");
 		i++;
 	}
 	while (i > 1)
 	{
-		my_push_back(b, my_pop(b));
-		my_putstr("rb", 1);
+		my_rotate(b);
+		my_putstr("rb");
 		i--;
 	}
 	if (i == 1)
 	{
 		my_swap(b);
-		my_putstr("sb", 2);
+		my_putstr("sb");
 	}
 }
 
@@ -97,9 +97,9 @@ void	empty_b(t_list **a, t_list **b, int *size)
 	if ((*a) && (*a)->next && (*a)->data > (*a)->next->data)
 	{
 		my_swap(a);
-		my_putstr("sa", 2);
+		my_putstr("sa");
 	}
-	my_push(a, my_pop(b));
-	my_putstr("pa", 0);
+	my_push(a, b);
+	my_putstr("pa");
 	(*size)--;
 }

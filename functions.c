@@ -21,7 +21,7 @@ static int	a_b_check(char c)
 	return (2);
 }
 
-void	my_putstr(char *s1, short check)
+void	my_putstr(char *s1)
 {
 	static char	*s2;
 	int			i;

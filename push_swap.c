@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 	b = NULL;
 	size = 0;
 	a = my_check(ac, av, &size);
-	if (size == 1 || my_issorted(a))
+	if (!a || size == 1 || my_issorted(a))
 		exit(0);
 	put_index(a, size);
 	if (size > 3)
@@ -33,7 +33,8 @@ int	main(int ac, char **av)
 	if (a && a->next && a->data > a->next->data)
 	{
 		my_swap(&a);
-		my_putstr("sa", 2);
+		my_putstr("sa");
 	}
-	my_putstr(NULL, 0);
+	my_putstr(NULL);
+	return (0);
 }

@@ -1,15 +1,17 @@
 NAME = push_swap
 NAME_B = checker
-FLAGS = -Wall -Wextra -Werror -O3
+CFLAGS = -Wall -Wextra -Werror
+CC = gcc
 BOTH = check_initialise.c list_functions.c list_functions_2.c libft.c ft_split.c functions.c
 MANDATORY = push_swap.c list_sort.c empty.c 
-BONUS = checker.c get_next_line.c
+BONUS = checker_bonus.c get_next_line_bonus.c
 
 all: $(NAME)
 
 $(NAME): $(BOTH:.c=.o) $(MANDATORY:.c=.o) 
 
-$(NAME_B): $(BOTH:.c=.o) $(BONUS:.c=.o)
+$(NAME_B): $(BONUS:.c=.o) $(BOTH:.c=.o)
+	gcc $(BONUS:.c=.o) $(BOTH:.c=.o) -o $@
 
 bonus:$(NAME_B)
 

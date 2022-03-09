@@ -26,25 +26,31 @@ t_list	*initialise(int data)
 	return (lst);
 }
 
-void	my_push(t_list **list, t_list *new)
+void	my_push(t_list **push, t_list **pop)
 {
+	t_list	*new;
+
+	new = *pop;
+	*pop = (*pop)->next;
+	new->next = NULL;
 	if (!new)
 		return ;
-	if (!*list)
+	if (!*push)
 	{
-		*list = new;
+		*push = new;
 		return ;
 	}
-	new->next = *list;
-	*list = new;
+	new->next = *push;
+	*push = new;
 }
 
-void	my_push_back(t_list **list, t_list *new)
+void	my_push_back(t_list **list, t_list *new, int *size)
 {
 	t_list	*lst;
 
 	if (!new)
 		return ;
+	(*size)++;
 	if (!*list)
 	{
 		*list = new;
@@ -56,35 +62,40 @@ void	my_push_back(t_list **list, t_list *new)
 	lst->next = new;
 }
 
-//remove and return front 
-t_list	*my_pop(t_list **list)
+void	my_rotate(t_list **list)
 {
-	t_list	*lst;
+	t_list	*t;
 
-	lst = *list;
-	if (!lst)
-		return (NULL);
-	*list = (*list)->next;
-	lst->next = NULL;
-	return (lst);
+	if (!list || !(*list) || !(*list)->next)
+		return ;
+	if (!(*list)->next->next)
+	{
+		my_swap(list);
+		return ;
+	}
+	t = *list;
+	while (t->next)
+		t = t->next;
+	t->next = *list;
+	(*list) = (*list)->next;
+	t->next->next = NULL;
 }
 
-t_list	*my_pop_last(t_list **list)
+void	my_rrotate(t_list **list)
 {
-	t_list	*pop;
-	t_list	*lst;
+	t_list	*t;
 
-	lst = *list;
-	if (!lst)
-		return (lst);
-	if (!(lst->next))
+	if (!list || !(*list) || !(*list)->next)
+		return ;
+	if (!(*list)->next->next)
 	{
-		*list = NULL;
-		return (lst);
+		my_swap(list);
+		return ;
 	}
-	while (lst->next->next)
-		lst = lst->next;
-	pop = lst->next;
-	lst->next = NULL;
-	return (pop);
+	t = *list;
+	while (t->next->next)
+		t = t->next;
+	t->next->next = *list;
+	(*list) = t->next;
+	t->next = NULL;
 }

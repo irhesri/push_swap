@@ -17,12 +17,11 @@ void	instruction(char *c, t_list **a, t_list **b)
 	if (c[0] == 's')
 		my_swap(a);
 	else if (c[0] == 'p' && c[1] != 'p')
-		my_push(a, my_pop(b));
+		my_push(a, b);
 	else if (c[0] == 'r' && c[2] == '\0')
-		my_push_back(a, my_pop(a))
-;
+		my_rotate(a);
 	else if (c[0] == 'r' && c[1] == 'r')
-		my_push(a, my_pop_last(a));
+		my_rrotate(a);
 	else
 		exit (ft_putstr("Error\n", 2));
 }
@@ -63,8 +62,6 @@ int	main(int ac, char **av)
 	b = NULL;
 	a = my_check(ac, av, &size);
 	str = get_next_line(0);
-	if (!str || !*str)
-		exit (ft_putstr("Error\n", 2));
 	while (str)
 	{
 		((str[1] == 'a' || str[2] == 'a') && execute(str, &a, &b))

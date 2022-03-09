@@ -18,14 +18,13 @@ void	sort_3(t_list **a, int size)
 	{
 		if (size > 2 && (*a)->data > (*a)->next->next->data)
 		{
-			my_push_back(a, my_pop(a))
-;
-			my_putstr("ra", 1);
+			my_rotate(a);
+			my_putstr("ra");
 		}
 		else
 		{
 			my_swap(a);
-			my_putstr("sa", 2);
+			my_putstr("sa");
 		}
 	}
 }
@@ -59,23 +58,22 @@ static void	push_in_b(t_list **a, t_list **b, int i, int size)
 {
 	while (i > 1)
 	{
-		my_push_back(a, my_pop(a))
-;
-		my_putstr("ra", 1);
+		my_rotate(a);
+		my_putstr("ra");
 		i--;
 	}
 	while (i < 0)
 	{
-		my_push(a, my_pop_last(a));
-		my_putstr("rra", 1);
+		my_rrotate(a);
+		my_putstr("rra");
 		i++;
 	}
-	my_push(b, my_pop(a));
-	my_putstr("pb", 0);
+	my_push(b, a);
+	my_putstr("pb");
 	if ((*b)->index < (size / 2))
 	{
-		my_push_back(b, my_pop(b));
-		my_putstr("rb", 1);
+		my_rotate(b);
+		my_putstr("rb");
 	}
 }
 
@@ -85,7 +83,7 @@ void	list_sort(t_list **a, t_list **b, int size)
 	int	x;
 	int	max;
 	int	min;
-	
+
 	x = 30;
 	if (size <= 10)
 		x = 2;

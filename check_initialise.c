@@ -25,28 +25,28 @@ static	int	duplicate_check(t_list *a, t_list *new)
 
 t_list	*my_check(int ac, char **av, int *size)
 {
+	int		i;
+	char	**list;
 	t_list	*a;
 	t_list	*b;
-	char	**list;
 
-	av++;
 	a = NULL;
-	while (ac-- && *av)
+	while (ac-- && *++av)
 	{
 		list = ft_split(*av, ' ');
 		if (!list)
 			exit (0);
-		while (*list || !a)
+		i = -1;
+		while (list[++i] || !a)
 		{
-			b = initialise(my_atoi(*list));
-			if (!*list++ || duplicate_check(a, b))
+			b = initialise(my_atoi(list[i]));
+			if (!list[i] || duplicate_check(a, b))
 				exit (ft_putstr("Error\n", 2));
-			my_push_back(&a, b);
-			(*size)++;
+			my_push_back(&a, b, size);
 		}
-		av++;
+		while (--i >= 0)
+			free(list[i]);
+		free(list);
 	}
-	if (!a)
-		exit(0);
 	return (a);
 }
