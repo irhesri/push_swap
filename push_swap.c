@@ -28,12 +28,12 @@ int	main(int ac, char **av)
 		list_sort(&a, &b, size);
 	sort_3(&a, 3);
 	size -= 3;
-	while (b)
+	while (size)
 		empty_b(&a, &b, &size);
-	if (a && a->next && a->data > a->next->data)
+	while (a->index != 1)
 	{
-		my_swap(&a);
-		my_putstr("sa");
+		my_rrotate(&a);
+		my_putstr("rra");
 	}
 	my_putstr(NULL);
 	return (0);
