@@ -24,7 +24,6 @@ typedef struct s_list
 	int				index;
 	struct s_list	*next;
 }	t_list;
-void	print(t_list *lst);
 
 //list functions
 t_list	*initialise(int data);
