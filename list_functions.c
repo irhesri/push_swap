@@ -12,7 +12,34 @@
 
 #include "push_swap.h"
 
-// check if list is sorted
+t_node	*initialise(int data)
+{
+	t_node	*node;
+
+	node = malloc(sizeof(t_node));
+	if (!node)
+		exit(ft_putstr("allocation error\n", 2));
+	node->data = data;
+	node->index = 0;
+	node->next = NULL;
+	return (node);
+}
+
+void	my_push_back(t_stack *stack, t_node *new)
+{
+	if (!new)
+		return ;
+	(stack->size)++;
+	if (!stack->head)
+	{
+		stack->head = new;
+		stack->tail = new;
+		return ;
+	}
+	stack->tail->next = new;
+	stack->tail = new;
+}
+
 int	my_issorted(t_node *head)
 {
 	while (head && head->next)

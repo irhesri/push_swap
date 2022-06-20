@@ -12,6 +12,16 @@
 
 #include "push_swap.h"
 
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
 static	char const	*my_skip(char const *s, char c, int *size, int *len)
 {
 	if (s)

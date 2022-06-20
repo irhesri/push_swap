@@ -12,6 +12,16 @@
 
 #include "push_swap.h"
 
+int	my_strcmp(char *s1, char *s2)
+{
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
+}
+
 void	instruction(char *c, t_list **a, t_list **b)
 {
 	if (c[0] == 's')

@@ -45,9 +45,9 @@ void	my_rotate(t_stack *stack)
 		return ;
 	}
 	stack->tail->next = stack->head;
-	stack->head = stack->head->next; 
+	stack->head = stack->head->next;
 	stack->tail = stack->tail->next;
-	stack->tail->next = NULL; 
+	stack->tail->next = NULL;
 }
 
 void	my_rrotate(t_stack *stack)

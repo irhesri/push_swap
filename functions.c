@@ -48,3 +48,41 @@ void	my_putstr(char *s1)
 	write(1, "\n", 1);
 	s2 = s1;
 }
+
+
+int	ft_putstr(char *s, int fd)
+{
+	if (s)
+	{
+		while (*s)
+		{
+			write(fd, s, 1);
+			s++;
+		}
+	}
+	return (0);
+}
+
+int	my_atoi(char *str)
+{
+	unsigned long long	n;
+	int					symbole;
+
+	n = 0;
+	symbole = 1;
+	if (!str)
+		exit (ft_putstr("Error\n", 2));
+	if (*str == '-')
+		symbole = -1;
+	if ((*str == '+' || *str == '-') && *(str + 1))
+		str++;
+	while (*str > 47 && *str < 58 && (n < 2147483648))
+	{
+		n = n * 10 + *str - 48;
+		str++;
+	}
+	if (*str || (n >= 2147483648 && symbole == 1)
+		|| (n > 2147483648 && symbole == -1))
+		exit (ft_putstr("Error\n", 2));
+	return (symbole * n);
+}

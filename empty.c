@@ -34,22 +34,14 @@ static int	node_position(t_stack *stack, int max)
 	return (0);
 }
 
-void	empty_b(t_stack *a, t_stack *b, int max)
+int	get_max(t_stack *a, t_stack *b, int max, int p)
 {
-	int			p;
-	static int	n;
-	
-	p = node_position(b, max);
-	if (!p)
-	{
-		my_rrotate(a);
-		my_putstr("rra");
-		n--;
-		return ;
-	}
+	int	n;
+
+	n = 0;
 	while (b->head->index != max)
 	{
-		if (!n || b->head->index > a->tail->index)
+		if (a->tail->index > max && b->head->index > a->tail->index)
 		{
 			my_push(a, b);
 			my_putstr("pa");
@@ -68,6 +60,23 @@ void	empty_b(t_stack *a, t_stack *b, int max)
 			my_putstr("rrb");
 		}
 	}
+	return (n);
+}
+
+void	empty_b(t_stack *a, t_stack *b, int max)
+{
+	int			p;
+	static int	n;
+
+	if (max == a->tail->index)
+	{
+		my_rrotate(a);
+		my_putstr("rra");
+		n--;
+		return ;
+	}
+	p = node_position(b, max);
+	n += get_max(a, b, max, p);
 	my_push(a, b);
 	my_putstr("pa");
 }
