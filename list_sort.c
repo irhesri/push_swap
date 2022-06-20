@@ -12,49 +12,50 @@
 
 #include "push_swap.h"
 
-void	sort_3(t_list **a, int size)
+void	sort_3(t_stack *a, int size)
 {
-	while (!my_issorted(*a))
+	while (!my_issorted(a->head))
 	{
-		if (size > 2 && (*a)->data > (*a)->next->next->data)
+		if (size > 2 && a->head->index > a->tail->index)
 		{
 			my_rotate(a);
 			my_putstr("ra");
 		}
 		else
 		{
-			my_swap(a);
+			my_swap(a->head);
 			my_putstr("sa");
 		}
 	}
 }
 
-static int	node_position(t_list *a, int max, int min)
+static int	node_position(t_stack *stack, int max, int min)
 {
-	int	i;
-	int	position[2];
+	int		i;
+	int		pos;
+	t_node	*head;
 
 	i = 0;
-	position[0] = 0;
-	while (a)
+	head = stack->head;
+	pos = 0;
+	while (head)
 	{
-		if (a->index <= max && a->index >= min)
+		if (head->index <= max && head->index >= min)
 		{
-			if (!position[0])
-				position[0] = i + 1;
-			position[1] = i + 1;
+			if (!pos)
+			{
+				if ((i + 1) < (stack->size / 2))
+					return (i + 1);
+			}
+			pos = i + 1;
 		}
 		i++;
-		a = a->next;
+		head = head->next;
 	}
-	if (!position[0])
-		return (0);
-	if (position[0] > (i / 2 + 1))
-		return (position[1] - i - 1);
-	return (position[0]);
+	return (pos - i - 1);
 }
 
-static void	push_in_b(t_list **a, t_list **b, int i, int size)
+static void	push_in_b(t_stack *a, t_stack *b, int i, int size)
 {
 	while (i > 1)
 	{
@@ -70,14 +71,14 @@ static void	push_in_b(t_list **a, t_list **b, int i, int size)
 	}
 	my_push(b, a);
 	my_putstr("pb");
-	if ((*b)->index < (size / 2))
+	if (b->head->index < (size / 2))
 	{
 		my_rotate(b);
 		my_putstr("rb");
 	}
 }
 
-void	list_sort(t_list **a, t_list **b, int size)
+void	list_sort(t_stack *a, t_stack *b, int size)
 {
 	int	i;
 	int	x;
@@ -89,18 +90,19 @@ void	list_sort(t_list **a, t_list **b, int size)
 		x = 2;
 	else if (size < 150)
 		x = 12;
-	max = size / 2 + x;
-	min = size / 2 - x;
-	while ((*a)->next->next->next)
+	max = size / 2;
+	min = max;
+	while (a->size > 3)
 	{
-		(max >= (size - 3)) && (min = 1) && (max = size - 3);
-		i = node_position(*a, max, min);
-		while (i && (*a)->next->next->next)
-		{
-			push_in_b(a, b, i, size);
-			i = node_position(*a, max, min);
-		}
 		max += x;
 		min -= x;
+		(max >= (size - 3)) && (min = 1) && (max = size - 3);
+		i = node_position(a, max, min);
+		while (i && a->size > 3)
+		{
+			push_in_b(a, b, i, size);
+			i = node_position(a, max, min);
+		}
 	}
+	sort_3(a, 3);
 }

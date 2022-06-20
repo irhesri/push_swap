@@ -12,41 +12,69 @@
 
 #include "push_swap.h"
 
-static	int	duplicate_check(t_list *a, t_list *new)
+static t_node	*initialise(int data)
 {
-	while (a)
+	t_node	*node;
+
+	node = malloc(sizeof(t_node));
+	if (!node)
+		exit(ft_putstr("allocation error\n", 2));
+	node->data = data;
+	node->index = 0;
+	node->next = NULL;
+	return (node);
+}
+
+static void	my_push_back(t_stack *stack, t_node *new)
+{
+	if (!new)
+		return ;
+	(stack->size)++;
+	if (!stack->head)
 	{
-		if (a->data == new->data)
+		stack->head = new;
+		stack->tail = new;
+		return ;
+	}
+	stack->tail->next = new;
+	stack->tail = new;
+}
+
+static	int	duplicate_check(t_node *head, int new)
+{
+	while (head)
+	{
+		if (head->data == new)
 			return (1);
-		a = a->next;
+		head = head->next;
 	}
 	return (0);
 }
 
-t_list	*my_check(int ac, char **av, int *size)
+void	my_check(char **av, t_stack *a)
 {
 	int		i;
 	char	**list;
-	t_list	*a;
-	t_list	*b;
+	t_node	*new;
 
-	a = NULL;
-	while (ac-- && *++av)
+	if (!a)
+		exit(ft_putstr("allocation error\n", 2));
+	a->head = NULL;
+	a->size = 0;
+	while (*++av)
 	{
 		list = ft_split(*av, ' ');
-		if (!list)
-			exit (0);
+		if (!list[0])
+			exit (ft_putstr("Error\n", 2));
 		i = -1;
-		while (list[++i] || !a)
+		while (list[++i])
 		{
-			b = initialise(my_atoi(list[i]));
-			if (!list[i] || duplicate_check(a, b))
-				exit (ft_putstr("Error\n", 2));
-			my_push_back(&a, b, size);
-		}
-		while (--i >= 0)
+			new = initialise(my_atoi(list[i]));
 			free(list[i]);
+			if (duplicate_check(a->head, new->data))
+				exit (ft_putstr("Error\n", 2));
+			my_push_back(a, new);
+		}
 		free(list);
 	}
-	return (a);
 }

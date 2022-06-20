@@ -12,70 +12,50 @@
 
 #include "push_swap.h"
 
-static int	node_position(t_list *lst, int n, short b)
+static int	node_position(t_stack *stack)
 {
-	static int	len;
-	int			i;
-	if (!len)
-		len = n;
-	if (!b)
-	{
-		len--;
-		return (0);
-	}
+	int		i;
+	t_node	*head;
+
 	i = 0;
-	while (lst)
+	head = stack->head;
+	while (head)
 	{
 		i++;
-		if (lst->index == n)
+		if (head->index == stack->size)
 		{
-			len--;
-			if (i > (len + 1) / 2)
+			if (i > (stack->size + 1) / 2)
 				return (-1);
 			else
 				return (1);
 		}
-		lst = lst->next;
+		head = head->next;
 	}
 	return (0);
 }
 
-static int	get_last(t_list *lst)
-{
-	if (!lst)
-		return (-1);
-	while (lst->next)
-		lst = lst->next;
-	return (lst->index);
-}
-void	empty_b(t_list **a, t_list **b, int *size)
+void	empty_b(t_stack *a, t_stack *b)
 {
 	int			p;
 	static int	n;
-	static int	last;
 	
-	p = node_position(*b, *size, 1);
+	p = node_position(b);
 	if (!p)
 	{
 		my_rrotate(a);
 		my_putstr("rra");
 		n--;
-		(*size)--;
-		if (n)
-			last = get_last(*a);
 		return ;
 	}
-	while ((*b)->index != (*size))
+	while (b->head->index != b->size)
 	{
-		if (!n || ((*b)->index > last))
+		if (!n || b->head->index > a->tail->index)
 		{
-			last = (*b)->index;
 			my_push(a, b);
 			my_putstr("pa");
 			my_rotate(a);
 			my_putstr("ra");
 			n++;
-			node_position(*a, n, 0);
 		}
 		else if (p > 0)
 		{
@@ -90,5 +70,4 @@ void	empty_b(t_list **a, t_list **b, int *size)
 	}
 	my_push(a, b);
 	my_putstr("pa");
-	(*size)--;
 }

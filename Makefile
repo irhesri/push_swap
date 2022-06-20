@@ -1,9 +1,9 @@
 NAME = push_swap
 NAME_B = checker
-CFLAGS = -Wall -Wextra -Werror
+#CFLAGS = -Wall -Wextra -Werror
 CC = gcc
-BOTH = check_initialise.c list_functions.c list_functions_2.c libft.c ft_split.c functions.c
-MANDATORY = push_swap.c list_sort.c empty.c 
+BOTH = check_initialise.c list_functions.c ps_functions.c libft.c ft_split.c functions.c
+MANDATORY = push_swap.c list_sort.c empty.c debugging_functions.c
 BONUS = checker_bonus.c get_next_line_bonus.c
 
 all: $(NAME)

@@ -14,27 +14,63 @@
 
 int	main(int ac, char **av)
 {
-	t_list	*a;
-	t_list	*b;
-	int		size;
+	t_stack	*a;
+	t_stack	*b;
 
-	b = NULL;
-	size = 0;
-	a = my_check(ac, av, &size);
-	if (!a || size == 1 || my_issorted(a))
-		exit(0);
-	put_index(a, size);
-	if (size > 3)
-		list_sort(&a, &b, size);
-	sort_3(&a, 3);
-	size -= 3;
-	while (size)
-		empty_b(&a, &b, &size);
-	while (a->index != 1)
+	if (ac == 1)
+		return (0);
+	a = malloc(sizeof(t_stack));
+	my_check(av, a);
+	put_index(a->head, a->size);
+	// if (a->size < 2 || my_issorted(a->head))
+	// 	exit(0);
+	b = malloc(sizeof(t_stack));
+	b->head = NULL;
+	b->size = 0;
+	// print_stack(a->head);
+	list_sort(a, b, a->size);
+	print_stack(a->head);
+	return 0;
+	while (b->size)
+		empty_b(a, b);
+	while (a->head->index != 1)
 	{
-		my_rrotate(&a);
+		my_rrotate(a);
 		my_putstr("rra");
 	}
 	my_putstr(NULL);
+	print_stack(b->head);
+
+	// print_stack_info(a, 'A');
+	// my_rrotate(a);
+	// print_stack_info(a, 'A');
+	// printf("---------------------------------\n");
+
+	// print_stack_info(a, 'A');
+	// my_rotate(a);
+	// print_stack_info(a, 'A');
+	// printf("---------------------------------\n");
+	// // print_stack_info(b, 'B');
+	// my_push(b, a);
+	// print_stack_info(b, 'B');
+	// printf("---------------------------------\n");
+	// print_stack_info(b, 'B');
+	// my_push(b, a);
+	// print_stack_info(b, 'B');
+	// printf("---------------------------------\n");
+	// print_stack_info(b, 'B');
+	// my_rotate(b);
+	// print_stack_info(b, 'B');
+	// printf("---------------------------------\n");
+	// print_stack_info(a, 'A');
+	// my_rotate(a);
+	// print_stack_info(a, 'A');
+	// printf("---------------------------------\n");
+	// 	print_stack_info(a, 'A');
+	// my_rotate(a);
+	// print_stack_info(a, 'A');
+	// printf("---------------------------------\n");
+	// print_stack(a->head);
+
 	return (0);
 }
