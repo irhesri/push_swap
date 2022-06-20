@@ -49,7 +49,6 @@ void	my_putstr(char *s1)
 	s2 = s1;
 }
 
-
 int	ft_putstr(char *s, int fd)
 {
 	if (s)
@@ -60,7 +59,7 @@ int	ft_putstr(char *s, int fd)
 			s++;
 		}
 	}
-	return (0);
+	return (1);
 }
 
 int	my_atoi(char *str)

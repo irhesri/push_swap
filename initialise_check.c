@@ -12,23 +12,41 @@
 
 #include "push_swap.h"
 
-int	main(int ac, char **av)
+static	int	duplicate_check(t_node *head, int new)
 {
-	t_stack	*a;
-	t_stack	*b;
-
-	if (ac == 1)
-		return (0);
-	a = malloc(sizeof(t_stack));
-	my_check(av, a);
-	put_index(a->head, a->size);
-	if (a->size < 2 || my_issorted(a->head))
-		exit(0);
-	b = malloc(sizeof(t_stack));
-	b->head = NULL;
-	b->size = 0;
-	list_sort(a, b, a->size);
-	empty_b(a, b, b->size);
-	my_putstr(NULL);
+	while (head)
+	{
+		if (head->data == new)
+			return (1);
+		head = head->next;
+	}
 	return (0);
+}
+
+void	my_check(char **av, t_stack *a)
+{
+	int		i;
+	char	**list;
+	t_node	*new;
+
+	if (!a)
+		exit(ft_putstr("allocation error\n", 2));
+	a->head = NULL;
+	a->size = 0;
+	while (*++av)
+	{
+		list = ft_split(*av, ' ');
+		if (!list[0])
+			exit (ft_putstr("Error\n", 2));
+		i = -1;
+		while (list[++i])
+		{
+			new = initialise(my_atoi(list[i]));
+			free(list[i]);
+			if (duplicate_check(a->head, new->data))
+				exit (ft_putstr("Error\n", 2));
+			my_push_back(a, new);
+		}
+		free(list);
+	}
 }

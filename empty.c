@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static int	node_position(t_stack *stack, int max)
+static short	node_position(t_stack *stack, int max)
 {
 	int		i;
 	t_node	*head;
@@ -34,23 +34,25 @@ static int	node_position(t_stack *stack, int max)
 	return (0);
 }
 
-int	get_max(t_stack *a, t_stack *b, int max, int p)
+static void	get_max(t_stack *a, t_stack *b, int max, short p)
 {
-	int	n;
-
-	n = 0;
 	while (b->head->index != max)
 	{
-		if (a->tail->index > max && b->head->index > a->tail->index)
+		if (b->head->index == max - 1)
+		{
+			my_push(a, b);
+			my_putstr("pa");
+		}
+		else if (a->tail->index > max || b->head->index > a->tail->index)
 		{
 			my_push(a, b);
 			my_putstr("pa");
 			my_rotate(a);
 			my_putstr("ra");
-			n++;
 		}
 		else if (p > 0)
 		{
+
 			my_rotate(b);
 			my_putstr("rb");
 		}
@@ -60,23 +62,31 @@ int	get_max(t_stack *a, t_stack *b, int max, int p)
 			my_putstr("rrb");
 		}
 	}
-	return (n);
 }
 
 void	empty_b(t_stack *a, t_stack *b, int max)
 {
-	int			p;
-	static int	n;
+	short	p;
 
-	if (max == a->tail->index)
+	while (b->size || a->head->index != 1)
 	{
-		my_rrotate(a);
-		my_putstr("rra");
-		n--;
-		return ;
+		if (max == a->tail->index)
+		{
+			my_rrotate(a);
+			my_putstr("rra");
+		}
+		else if (a->head->next->index == max)
+		{
+			my_swap(a->head);
+			my_putstr("sa");
+		}
+		else
+		{
+			p = node_position(b, max);
+			get_max(a, b, max, p);
+			my_push(a, b);
+			my_putstr("pa");
+		}
+		max--;
 	}
-	p = node_position(b, max);
-	n += get_max(a, b, max, p);
-	my_push(a, b);
-	my_putstr("pa");
 }

@@ -22,10 +22,10 @@ int	my_strcmp(char *s1, char *s2)
 	return (*s1 - *s2);
 }
 
-void	instruction(char *c, t_list **a, t_list **b)
+void	instruction(char *c, t_stack *a, t_stack *b)
 {
 	if (c[0] == 's')
-		my_swap(a);
+		my_swap(a->head);
 	else if (c[0] == 'p' && c[1] != 'p')
 		my_push(a, b);
 	else if (c[0] == 'r' && c[2] == '\0')
@@ -36,7 +36,7 @@ void	instruction(char *c, t_list **a, t_list **b)
 		exit (ft_putstr("Error\n", 2));
 }
 
-static	int	execute(char *str, t_list **a, t_list **b)
+static	int	execute(char *str, t_stack *a, t_stack *b)
 {
 	int	i;
 
@@ -61,24 +61,29 @@ static	int	execute(char *str, t_list **a, t_list **b)
 
 int	main(int ac, char **av)
 {
-	t_list	*a;
-	t_list	*b;
-	int		size;
+	t_stack	*a;
+	t_stack	*b;
 	char	*str;
 
 	if (ac == 1)
 		exit (0);
-	size = 0;
-	b = NULL;
-	a = my_check(ac, av, &size);
+	a = malloc(sizeof(t_stack));
+	my_check(av, a);
+	put_index(a->head, a->size);
+	b = malloc(sizeof(t_stack));
+	b->head = NULL;
+	b->size = 0;
 	str = get_next_line(0);
 	while (str)
 	{
-		((str[1] == 'a' || str[2] == 'a') && execute(str, &a, &b))
-			|| execute(str, &b, &a);
+		((str[1] == 'a' || str[2] == 'a') && execute(str, a, b))
+			|| execute(str, b, a);
 		free(str);
 		str = get_next_line(0);
 	}
-	(my_issorted(a) && !b && !ft_putstr("OK\n", 1)) || ft_putstr("KO\n", 1);
+	if (my_issorted(a->head) && !b->head)
+		ft_putstr("OK\n", 1);
+	else 
+		ft_putstr("KO\n", 1);
 	return (0);
 }

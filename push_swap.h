@@ -44,6 +44,7 @@ void	my_rrotate(t_stack *stack);
 //new functions
 void	put_index(t_node *head, int size);
 void	my_putstr(char *s1);
+void	my_check(char **av, t_stack *a);
 
 //sort
 void	list_sort(t_stack *a, t_stack *b, int size);
