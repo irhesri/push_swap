@@ -49,7 +49,7 @@ void	my_putstr(char *s1);
 // //sort
 // void	sort_3(t_list **a, int size);
 void	list_sort(t_stack *a, t_stack *b, int size);
-void	empty_b(t_stack *a, t_stack *b);
+void	empty_b(t_stack *a, t_stack *b, int max);
 
 //libft
 int		ft_putstr(char *s, int fd);

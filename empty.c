@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static int	node_position(t_stack *stack)
+static int	node_position(t_stack *stack, int max)
 {
 	int		i;
 	t_node	*head;
@@ -22,7 +22,7 @@ static int	node_position(t_stack *stack)
 	while (head)
 	{
 		i++;
-		if (head->index == stack->size)
+		if (head->index == max)
 		{
 			if (i > (stack->size + 1) / 2)
 				return (-1);
@@ -34,12 +34,12 @@ static int	node_position(t_stack *stack)
 	return (0);
 }
 
-void	empty_b(t_stack *a, t_stack *b)
+void	empty_b(t_stack *a, t_stack *b, int max)
 {
 	int			p;
 	static int	n;
 	
-	p = node_position(b);
+	p = node_position(b, max);
 	if (!p)
 	{
 		my_rrotate(a);
@@ -47,7 +47,7 @@ void	empty_b(t_stack *a, t_stack *b)
 		n--;
 		return ;
 	}
-	while (b->head->index != b->size)
+	while (b->head->index != max)
 	{
 		if (!n || b->head->index > a->tail->index)
 		{

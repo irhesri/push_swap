@@ -44,15 +44,17 @@ static int	node_position(t_stack *stack, int max, int min)
 		{
 			if (!pos)
 			{
-				if ((i + 1) < (stack->size / 2))
+				if ((i + 1) <= (stack->size / 2))
 					return (i + 1);
 			}
-			pos = i + 1;
+			pos = i;
 		}
 		i++;
 		head = head->next;
 	}
-	return (pos - i - 1);
+	if (!pos)
+		return (pos);
+	return (pos - i);
 }
 
 static void	push_in_b(t_stack *a, t_stack *b, int i, int size)
