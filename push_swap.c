@@ -21,7 +21,6 @@ int	main(int ac, char **av)
 		return (0);
 	a = malloc(sizeof(t_stack));
 	my_check(av, a);
-	put_index(a->head, a->size);
 	if (a->size < 2 || my_issorted(a->head))
 		exit(0);
 	b = malloc(sizeof(t_stack));
@@ -30,5 +29,7 @@ int	main(int ac, char **av)
 	list_sort(a, b, a->size);
 	empty_b(a, b, b->size);
 	my_putstr(NULL);
+	free_stack(a);
+	free_stack(b);
 	return (0);
 }

@@ -40,6 +40,7 @@ void	my_push(t_stack *push, t_stack *pop);
 void	my_swap(t_node *head);
 void	my_rotate(t_stack *stack);
 void	my_rrotate(t_stack *stack);
+void	free_stack(t_stack *stack);
 
 //new functions
 void	put_index(t_node *head, int size);

@@ -69,7 +69,6 @@ int	main(int ac, char **av)
 		exit (0);
 	a = malloc(sizeof(t_stack));
 	my_check(av, a);
-	put_index(a->head, a->size);
 	b = malloc(sizeof(t_stack));
 	b->head = NULL;
 	b->size = 0;
@@ -81,9 +80,9 @@ int	main(int ac, char **av)
 		free(str);
 		str = get_next_line(0);
 	}
-	if (my_issorted(a->head) && !b->head)
-		ft_putstr("OK\n", 1);
-	else 
+	if (!(my_issorted(a->head) && !b->head && ft_putstr("OK\n", 1)))
 		ft_putstr("KO\n", 1);
+	free_stack(a);
+	free_stack(b);
 	return (0);
 }

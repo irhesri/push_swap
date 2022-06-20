@@ -49,4 +49,18 @@ void	my_check(char **av, t_stack *a)
 		}
 		free(list);
 	}
+	put_index(a->head, a->size);
+}
+
+void	free_stack(t_stack *stack)
+{
+	t_node	*tmp;
+
+	while (stack->head)
+	{
+		tmp = stack->head->next;
+		free(stack->head);
+		stack->head = tmp;
+	}
+	free(stack);
 }
