@@ -2,7 +2,7 @@ NAME 		= push_swap
 NAME_B 		= checker
 CFLAGS 		= #-Wall -Wextra -Werror
 CC 			= gcc -g -fsanitize=address
-BOTH 		= list_functions.c ps_functions.c ft_split.c functions.c initialise_check.c
+BOTH 		= list_functions.c ps_functions.c new_split.c functions.c initialise_check.c
 MANDATORY 	= push_swap.c list_sort.c empty.c
 BONUS	 	= checker_bonus.c get_next_line_bonus.c
 OBJ			= $(BOTH:.c=.o) $(MANDATORY:.c=.o) 

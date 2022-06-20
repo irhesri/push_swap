@@ -52,7 +52,6 @@ static void	get_max(t_stack *a, t_stack *b, int max, short p)
 		}
 		else if (p > 0)
 		{
-
 			my_rotate(b);
 			my_putstr("rb");
 		}

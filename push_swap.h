@@ -54,11 +54,9 @@ void	empty_b(t_stack *a, t_stack *b, int max);
 //libft
 int		ft_putstr(char *s, int fd);
 int		my_atoi(char *str);
-char	**ft_split(char const *s, char c);
+char	**my_split(char *str, char c);
 
 //bonus
 char	*get_next_line(int fd);
-
-void	print_stack(t_node *head);
 
 #endif

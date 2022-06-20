@@ -35,7 +35,7 @@ void	my_check(char **av, t_stack *a)
 	a->size = 0;
 	while (*++av)
 	{
-		list = ft_split(*av, ' ');
+		list = my_split(*av, ' ');
 		if (!list[0])
 			exit (ft_putstr("Error\n", 2));
 		i = -1;
